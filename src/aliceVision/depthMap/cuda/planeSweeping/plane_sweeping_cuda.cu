@@ -2728,6 +2728,18 @@ void ps_refineRcDepthMap(CudaArray<uchar4, 2>** ps_texs_arr, float* osimMap_hmh,
 
     clock_t tall = tic();
 
+#define GRIFF_TEST
+#ifdef GRIFF_TEST
+    refine_compUpdateYKNCCSimMapPatch_kernel<<<grid, block>>>(
+        bestSimMap_dmp.getBuffer(), bestSimMap_dmp.stride()[0], // output
+        bestDptMap_dmp.getBuffer(), bestDptMap_dmp.stride()[0], // output
+        rcDepthMap_dmp.getBuffer(), rcDepthMap_dmp.stride()[0],
+        width, height, wsh, gammaC, gammaP, epipShift,
+        ntcsteps,
+        moveByTcOrRc, xFrom, imWidth, imHeight,
+        lastThreeSimsMap.getBuffer(), lastThreeSimsMap.stride()[0], 1 );
+    cudaThreadSynchronize();
+#else
     for(int i = 0; i < ntcsteps; i++) // Default ntcsteps = 31
     {
         refine_compUpdateYKNCCSimMapPatch_kernel<<<grid, block>>>(
@@ -2744,6 +2756,7 @@ void ps_refineRcDepthMap(CudaArray<uchar4, 2>** ps_texs_arr, float* osimMap_hmh,
         bestSimMap_dmp.getBuffer(), bestSimMap_dmp.stride()[0],
         width, height, 1);
     cudaThreadSynchronize();
+#endif
 
     refine_compYKNCCSimMapPatch_kernel<<<grid, block>>>(
         simMap_dmp.getBuffer(), simMap_dmp.stride()[0],
