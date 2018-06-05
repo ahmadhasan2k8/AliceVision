@@ -3,6 +3,15 @@
 // v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code_fuse.h"
+
+#include "aliceVision/depthMap/cuda/planeSweeping/device_utils.h"
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code.h"
+
+#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_global.h"
+
 namespace aliceVision {
 namespace depthMap {
 

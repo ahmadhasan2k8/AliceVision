@@ -3,21 +3,12 @@
 // v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#pragma once
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.h"
+
+#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.h"
 
 namespace aliceVision {
 namespace depthMap {
-
-// patch exhaustive search
-
-struct patch
-{
-	float3 p; //< 3d point
-	float3 n; //< normal
-	float3 x; //< 
-	float3 y; //< 
-    float d;  //< 
-};
 
 __device__ void rotPointAroundVect(float3& out, float3& X, float3& vect, int angle)
 {

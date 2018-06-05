@@ -3,9 +3,16 @@
 // v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#pragma once
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code.h"
 
-#include <aliceVision/depthMap/cuda/planeSweeping/device_utils.cu>
+#include "aliceVision/depthMap/cuda/planeSweeping/device_utils.h"
+
+#include "aliceVision/depthMap/cuda/deviceCommon/device_global.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_color.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_eig33.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_simStat.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.h"
 
 #include <math_constants.h>
 
@@ -20,9 +27,9 @@ texture<unsigned char, 2, cudaReadModeNormalizedFloat> rtex;
 texture<unsigned char, 2, cudaReadModeNormalizedFloat> ttex;
 */
 
-#define DCT_DIMENSION 7
+// #define DCT_DIMENSION 7
 
-#define MAX_CUDA_DEVICES 10
+// #define MAX_CUDA_DEVICES 10
 
 texture<int4, 2, cudaReadModeElementType> volPixsTex;
 

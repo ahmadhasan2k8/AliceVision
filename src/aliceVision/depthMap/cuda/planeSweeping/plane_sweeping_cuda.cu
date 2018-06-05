@@ -3,14 +3,19 @@
 // v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#include <aliceVision/depthMap/cuda/commonStructures.hpp>
-#include <aliceVision/depthMap/cuda/deviceCommon/device_color.cu>
-#include <aliceVision/depthMap/cuda/deviceCommon/device_patch_es.cu>
-#include <aliceVision/depthMap/cuda/deviceCommon/device_eig33.cu>
-#include <aliceVision/depthMap/cuda/planeSweeping/device_code.cu>
-#include <aliceVision/depthMap/cuda/planeSweeping/device_code_refine.cu>
-#include <aliceVision/depthMap/cuda/planeSweeping/device_code_volume.cu>
-#include <aliceVision/depthMap/cuda/planeSweeping/device_code_fuse.cu>
+#include "aliceVision/depthMap/cuda/planeSweeping/plane_sweeping_cuda.h"
+
+#include "aliceVision/depthMap/cuda/commonStructures.hpp"
+
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code.h"
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code_refine.h"
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code_volume.h"
+#include "aliceVision/depthMap/cuda/planeSweeping/device_code_fuse.h"
+
+#include "aliceVision/depthMap/cuda/deviceCommon/device_color.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_eig33.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_global.h"
 
 #include <math_constants.h>
 
@@ -33,11 +38,6 @@ namespace depthMap {
                                                                               \
 }
 
-
-// Round a / b to nearest higher integer value.
-inline unsigned int divUp(unsigned int a, unsigned int b) {
-  return (a % b != 0) ? (a / b + 1) : (a / b);
-}
 
 __host__ float3 ps_M3x3mulV3(float* M3x3, const float3& V)
 {
@@ -420,13 +420,7 @@ void ps_planeSweepingGPUPixels(CudaArray<uchar4, 2>** ps_texs_arr, CudaHostMemor
                                CudaHostMemoryHeap<float, 2>& depths_hmh, int slicesAtTime, int ntimes, int npixs,
                                int wsh, int kernelSizeHalf, int nPlanes, int scale, int CUDAdeviceNo,
                                int ncamsAllocated, int scales, bool verbose, bool doUsePixelsDepths, int nbest,
-                               bool useTcOrRcPixSize, float gammaC, float gammaP, bool subPixel, float epipShift = 0.0f
-                               /*,
-                               CudaHostMemoryHeap<float,2>  &sliceRef_hmh,
-                               CudaHostMemoryHeap<float3,2>  &slicePts_hmh,
-                               CudaHostMemoryHeap<float,2>  &sliceLocMin_hmh,
-                               CudaHostMemoryHeap<int,2>  &bdid_hmh*/
-                               )
+                               bool useTcOrRcPixSize, float gammaC, float gammaP, bool subPixel, float epipShift )
 {
     clock_t tall = tic();
     testCUDAdeviceNo(CUDAdeviceNo);
@@ -1654,7 +1648,7 @@ void ps_planeSweepingGPUPixelsFine(CudaArray<uchar4, 2>** ps_texs_arr, CudaHostM
                                    CudaHostMemoryHeap<float4, 2>& normals_hmh, int slicesAtTime, int ntimes,
                                    int npixs, int wsh, int kernelSizeHalf, int nPlanes, int scale, int CUDAdeviceNo,
                                    int ncamsAllocated, int scales, bool verbose, float gammaC, float gammaP,
-                                   float epipShift = 0.0f)
+                                   float epipShift )
 {
     clock_t tall = tic();
     testCUDAdeviceNo(CUDAdeviceNo);
@@ -2817,7 +2811,7 @@ void ps_refineRcDepthMap(CudaArray<uchar4, 2>** ps_texs_arr, float* osimMap_hmh,
 
     if(verbose)
         printf("gpu elapsed time: %f ms \n", toc(tall));
-};
+}
 
 /**
  * @brief ps_fuseDepthSimMapsGaussianKernelVoting

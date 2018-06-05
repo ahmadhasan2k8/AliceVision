@@ -3,12 +3,15 @@
 // v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#pragma once
+#pragma you cannot include this file
 
-#include <aliceVision/depthMap/cuda/deviceCommon/device_global.cu>
-#include <aliceVision/depthMap/cuda/deviceCommon/device_matrix.cu>
-#include <aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.hpp>
-#include <aliceVision/depthMap/cuda/deviceCommon/device_simStat.cu>
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.h"
+
+#include "aliceVision/depthMap/cuda/deviceCommon/device_global.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_simStat.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_color.h"
 
 #include <math_constants.h>
 
