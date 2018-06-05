@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.h"
-#include "aliceVision/depthMap/cuda/deviceCommon/device_simStat.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.cuh"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_simStat.cuh"
 
 namespace aliceVision {
 namespace depthMap {

@@ -4,17 +4,6 @@
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "aliceVision/depthMap/cuda/commonStructures.hpp"
-// #include "aliceVision/depthMap/cuda/deviceCommon/device_color.h"
-// #include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.h"
-// #include "aliceVision/depthMap/cuda/deviceCommon/device_eig33.h"
-// #include "aliceVision/depthMap/cuda/planeSweeping/device_code.h"
-// #include "aliceVision/depthMap/cuda/planeSweeping/device_code_refine.h"
-// #include "aliceVision/depthMap/cuda/planeSweeping/device_code_volume.h"
-// #include "aliceVision/depthMap/cuda/planeSweeping/device_code_fuse.h"
-
-// #include <math_constants.h>
-
-// #include <algorithm>
 
 #define GRIFF_TEST
 

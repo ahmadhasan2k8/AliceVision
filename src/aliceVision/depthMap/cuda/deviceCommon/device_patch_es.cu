@@ -5,13 +5,13 @@
 
 #pragma you cannot include this file
 
-#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es.cuh"
 
-#include "aliceVision/depthMap/cuda/deviceCommon/device_global.h"
-#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.h"
-#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.h"
-#include "aliceVision/depthMap/cuda/deviceCommon/device_simStat.h"
-#include "aliceVision/depthMap/cuda/deviceCommon/device_color.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_global.cuh"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.cuh"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.cuh"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_simStat.cuh"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_color.cuh"
 
 #include <math_constants.h>
 

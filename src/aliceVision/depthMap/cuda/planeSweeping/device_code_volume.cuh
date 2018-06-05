@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.cuh"
 
 namespace aliceVision {
 namespace depthMap {

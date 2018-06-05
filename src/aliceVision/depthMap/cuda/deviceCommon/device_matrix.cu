@@ -3,7 +3,7 @@
 // v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_matrix.cuh"
 
 // mn MATRIX ADDRESSING: mxy = x*n+y (x-row,y-col), (m-number of rows, n-number of columns)
 

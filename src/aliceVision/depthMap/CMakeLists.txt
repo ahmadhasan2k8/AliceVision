@@ -24,21 +24,20 @@ set(depthMap_files_sources
 
 set(depthMap_cuda_files_sources
   cuda/commonStructures.hpp
-  cuda/PlaneSweepingCuda.cpp               cuda/PlaneSweepingCuda.hpp
-  cuda/planeSweeping/plane_sweeping_cuda.cu
-  cuda/planeSweeping/device_code_refine.cu cuda/planeSweeping/device_code_refine.h
-  cuda/planeSweeping/device_utils.h
-  cuda/planeSweeping/device_code.cu        cuda/planeSweeping/device_code.h
-  cuda/planeSweeping/device_code_volume.cu cuda/planeSweeping/device_code_volume.h
-  cuda/planeSweeping/device_code_fuse.cu   cuda/planeSweeping/device_code_fuse.h
-  cuda/deviceCommon/device_patch_es_glob.cu
-  cuda/deviceCommon/device_patch_es_glob.h
-  cuda/deviceCommon/device_patch_es.cu     cuda/deviceCommon/device_patch_es.h
-  cuda/deviceCommon/device_color.cu        cuda/deviceCommon/device_color.h
-  cuda/deviceCommon/device_eig33.cu        cuda/deviceCommon/device_eig33.h
-  cuda/deviceCommon/device_global.cu       cuda/deviceCommon/device_global.h
-  cuda/deviceCommon/device_matrix.cu       cuda/deviceCommon/device_matrix.h
-  cuda/deviceCommon/device_simStat.cu      cuda/deviceCommon/device_simStat.h
+  cuda/PlaneSweepingCuda.cpp                cuda/PlaneSweepingCuda.hpp
+  cuda/planeSweeping/plane_sweeping_cuda.cu cuda/planeSweeping/plane_sweeping_cuda.hpp
+  cuda/planeSweeping/device_code_refine.cu  cuda/planeSweeping/device_code_refine.cuh
+  cuda/planeSweeping/device_utils.cuh
+  cuda/planeSweeping/device_code.cu         cuda/planeSweeping/device_code.cuh
+  cuda/planeSweeping/device_code_volume.cu  cuda/planeSweeping/device_code_volume.cuh
+  cuda/planeSweeping/device_code_fuse.cu    cuda/planeSweeping/device_code_fuse.cuh
+  cuda/deviceCommon/device_patch_es_glob.cu cuda/deviceCommon/device_patch_es_glob.cuh
+  cuda/deviceCommon/device_patch_es.cu      cuda/deviceCommon/device_patch_es.cuh
+  cuda/deviceCommon/device_color.cu         cuda/deviceCommon/device_color.cuh
+  cuda/deviceCommon/device_eig33.cu         cuda/deviceCommon/device_eig33.cuh
+  cuda/deviceCommon/device_global.cu        cuda/deviceCommon/device_global.cuh
+  cuda/deviceCommon/device_matrix.cu        cuda/deviceCommon/device_matrix.cuh
+  cuda/deviceCommon/device_simStat.cu       cuda/deviceCommon/device_simStat.cuh
 )
 source_group("depthMap_cuda" FILES ${depthMap_cuda_files_sources})
 

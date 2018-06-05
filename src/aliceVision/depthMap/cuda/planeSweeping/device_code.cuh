@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include "aliceVision/depthMap/cuda/planeSweeping/device_utils.h"
+#include "aliceVision/depthMap/cuda/planeSweeping/device_utils.cuh"
 
-#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.h"
+#include "aliceVision/depthMap/cuda/deviceCommon/device_patch_es_glob.cuh"
 
 #include <math_constants.h>
 
