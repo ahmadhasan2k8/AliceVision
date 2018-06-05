@@ -18,6 +18,7 @@
 #include "aliceVision/depthMap/cuda/deviceCommon/device_global.cuh"
 
 #include <math_constants.h>
+#include <iostream>
 
 #include <algorithm>
 
@@ -181,6 +182,7 @@ sizeof(float)*DCT_DIMENSION*DCT_DIMENSION*DCT_DIMENSION*DCT_DIMENSION);
 
 __host__ cudaArray* ps_create_gaussian_arr(float delta, int radius)
 {
+    std::cerr << "Computing Gaussian table for radius " << radius << std::endl;
     int size = 2 * radius + 1;
 
     float* d_gaussian;

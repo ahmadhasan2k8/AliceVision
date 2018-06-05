@@ -309,9 +309,12 @@ void ps_growDepthMap(
                     bool verbose, int wsh, float gammaC, float gammaP, float simThr);
 
 void ps_refineDepthMapReproject(
-                    CudaArray<uchar4, 2>** ps_texs_arr, CudaHostMemoryHeap<uchar4, 2>* otimg_hmh,
-                    CudaHostMemoryHeap<float, 2>* osim_hmh, CudaHostMemoryHeap<float, 2>* odpt_hmh,
-                    CudaHostMemoryHeap<float, 2>& depthMap_hmh, cameraStruct** cams, int ncams, int width,
+                    CudaArray<uchar4, 2>** ps_texs_arr,
+                    CudaHostMemoryHeap<uchar4, 2>* otimg_hmh,
+                    CudaHostMemoryHeap<float, 2>* osim_hmh,
+                    CudaHostMemoryHeap<float, 2>* odpt_hmh,
+                    CudaHostMemoryHeap<float, 2>& depthMap_hmh,
+                    cameraStruct** cams, int ncams, int width,
                     int height, int scale, int CUDAdeviceNo, int ncamsAllocated, int scales, bool verbose,
                     int wsh, float gammaC, float gammaP, float simThr, int niters, bool moveByTcOrRc);
 
