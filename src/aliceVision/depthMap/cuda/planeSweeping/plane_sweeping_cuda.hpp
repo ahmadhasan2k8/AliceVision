@@ -65,7 +65,10 @@ sizeof(float)*DCT_DIMENSION*DCT_DIMENSION*DCT_DIMENSION*DCT_DIMENSION);
 }
 */
 
-cudaArray* ps_create_gaussian_arr(float delta, int radius);
+// opaque declaration
+struct GaussianArray;
+
+GaussianArray* ps_create_gaussian_arr(float delta, int radius);
 
 int ps_listCUDADevices(bool verbose);
 

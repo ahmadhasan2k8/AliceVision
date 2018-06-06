@@ -26,6 +26,7 @@ set(depthMap_cuda_files_sources
   cuda/commonStructures.hpp
   cuda/PlaneSweepingCuda.cpp                cuda/PlaneSweepingCuda.hpp
   cuda/planeSweeping/plane_sweeping_cuda.cu cuda/planeSweeping/plane_sweeping_cuda.hpp
+  cuda/planeSweeping/cuda_global_data.cu    cuda/planeSweeping/cuda_global_data.cuh
   cuda/planeSweeping/device_code_refine.cu  cuda/planeSweeping/device_code_refine.cuh
   cuda/planeSweeping/device_utils.cuh
   cuda/planeSweeping/device_code.cu         cuda/planeSweeping/device_code.cuh

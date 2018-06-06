@@ -7,6 +7,7 @@
 
 #include "aliceVision/depthMap/cuda/commonStructures.hpp"
 
+#include "aliceVision/depthMap/cuda/planeSweeping/cuda_global_data.cuh"
 #include "aliceVision/depthMap/cuda/planeSweeping/device_code.cuh"
 #include "aliceVision/depthMap/cuda/planeSweeping/device_code_refine.cuh"
 #include "aliceVision/depthMap/cuda/planeSweeping/device_code_volume.cuh"
@@ -19,6 +20,7 @@
 
 #include <math_constants.h>
 #include <iostream>
+#include <map>
 
 #include <algorithm>
 
@@ -180,27 +182,10 @@ sizeof(float)*DCT_DIMENSION*DCT_DIMENSION*DCT_DIMENSION*DCT_DIMENSION);
 }
 */
 
-__host__ cudaArray* ps_create_gaussian_arr(float delta, int radius)
+__host__ GaussianArray* ps_create_gaussian_arr(float delta, int radius)
 {
-    std::cerr << "Computing Gaussian table for radius " << radius << std::endl;
-    int size = 2 * radius + 1;
-
-    float* d_gaussian;
-    cudaMalloc((void**)&d_gaussian, (2 * radius + 1) * sizeof(float));
-
-    // generate gaussian array
-    generateGaussian_kernel<<<1, size>>>(d_gaussian, delta, radius);
-    cudaThreadSynchronize();
-
-    cudaArray* d_gaussianArray = NULL;
-
-    // create cuda array
-    cudaChannelFormatDesc channelDesc = cudaCreateChannelDesc(32, 0, 0, 0, cudaChannelFormatKindFloat);
-    cudaMallocArray(&d_gaussianArray, &channelDesc, size, 1);
-    cudaMemcpyToArray(d_gaussianArray, 0, 0, d_gaussian, size * sizeof(float), cudaMemcpyDeviceToDevice);
-    cudaFree(d_gaussian);
-
-    return d_gaussianArray;
+    std::cerr << "Fetching Gaussian table for radius " << radius << " and delta " << delta << std::endl;
+    return global_data.getGaussianArray( delta, radius );
 }
 
 int ps_listCUDADevices(bool verbose)
@@ -366,8 +351,8 @@ void ps_deviceUpdateCam(CudaArray<uchar4, 2>** ps_texs_arr, cameraStruct* cam, i
     for(int scale = 1; scale < scales; scale++)
     {
         int radius = scale + 1;
-        cudaArray* gaussian_arr = ps_create_gaussian_arr(1.0f, radius);
-        cudaBindTextureToArray(gaussianTex, gaussian_arr, cudaCreateChannelDesc<float>());
+        GaussianArray* gaussian_arr = ps_create_gaussian_arr(1.0f, radius);
+        cudaBindTextureToArray(gaussianTex, gaussian_arr->arr, cudaCreateChannelDesc<float>());
 
         int block_size = 8;
         dim3 block(block_size, block_size, 1);
@@ -397,7 +382,7 @@ void ps_deviceUpdateCam(CudaArray<uchar4, 2>** ps_texs_arr, cameraStruct* cam, i
         };
 
         cudaUnbindTexture(gaussianTex);
-        cudaFreeArray(gaussian_arr);
+        // cudaFreeArray(gaussian_arr);
     };
 
     cudaUnbindTexture(r4tex);
