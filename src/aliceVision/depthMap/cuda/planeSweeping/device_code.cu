@@ -1090,6 +1090,7 @@ __global__ void updateBestDepth_kernel(
 }
 
 __global__ void downscale_bilateral_smooth_lab_kernel(
+    cudaTextureObject_t gaussianTex,
     uchar4* texLab, int texLab_p,
     int width, int height, int scale, int radius, float gammaC)
 {
@@ -1109,7 +1110,7 @@ __global__ void downscale_bilateral_smooth_lab_kernel(
             {
                 float4 curPix = 255.0f * tex2D(r4tex, (float)(x * scale + j) + (float)scale / 2.0f,
                                                (float)(y * scale + i) + (float)scale / 2.0f);
-                float factor = (tex1D(gaussianTex, i + radius) * tex1D(gaussianTex, j + radius)) // domain factor
+                float factor = (tex1D<float>(gaussianTex, i + radius) * tex1D<float>(gaussianTex, j + radius)) // domain factor
                                * CostYKfromLab(center, curPix, gammaC); // range factor
                 t = t + curPix * factor;
                 sum += factor;
@@ -1128,6 +1129,7 @@ __global__ void downscale_bilateral_smooth_lab_kernel(
 }
 
 __global__ void downscale_gauss_smooth_lab_kernel(
+    cudaTextureObject_t gaussianTex,
     uchar4* texLab, int texLab_p,
     int width, int height, int scale, int radius)
 {
@@ -1144,7 +1146,7 @@ __global__ void downscale_gauss_smooth_lab_kernel(
             {
                 float4 curPix = 255.0f * tex2D(r4tex, (float)(x * scale + j) + (float)scale / 2.0f,
                                                (float)(y * scale + i) + (float)scale / 2.0f);
-                float factor = (tex1D(gaussianTex, i + radius) * tex1D(gaussianTex, j + radius)); // domain factor
+                float factor = (tex1D<float>(gaussianTex, i + radius) * tex1D<float>(gaussianTex, j + radius)); // domain factor
                 t = t + curPix * factor;
                 sum += factor;
             }
