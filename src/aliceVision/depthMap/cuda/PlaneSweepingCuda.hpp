@@ -53,7 +53,7 @@ public:
     mvsUtils::PreMatchCams* pc;
 
     int CUDADeviceNo;
-    void** ps_texs_arr;
+    // void** ps_texs_arr;
 
     StaticVector<void*>* cams;
     StaticVector<int>* camsRcs;
