@@ -39,12 +39,21 @@ public:
     CudaArray<uchar4,2>& getScaledPictureArray( int scale, int cam );
     cudaTextureObject_t  getScaledPictureTex( int scale, int cam );
 
+    void                               allocPyramidArrays( int levels, int width, int height );
+    void                               freePyramidArrays( );
+    CudaDeviceMemoryPitched<uchar4,2>& getPyramidArray( int level );
+    cudaTextureObject_t                getPyramidTex( int level );
+
 private:
     std::map<GaussianArrayIndex,GaussianArray*> _gaussian_arr_table;
 
     std::vector<CudaArray<uchar4, 2>*>          _scaled_picture_array;
     std::vector<cudaTextureObject_t>            _scaled_picture_tex;
     int                                         _scaled_picture_scales;
+
+    std::vector<CudaDeviceMemoryPitched<uchar4, 2>*> _pyramid_array;
+    std::vector<cudaTextureObject_t>                 _pyramid_tex;
+    int                                              _pyramid_levels;
 };
 
 /*
