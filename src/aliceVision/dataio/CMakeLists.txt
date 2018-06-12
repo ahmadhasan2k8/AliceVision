@@ -29,9 +29,13 @@ set_property(TARGET aliceVision_dataio
 )
 
 target_link_libraries(aliceVision_dataio
-  aliceVision_sfm
-  ${Boost_LIBRARIES}
-  ${LOG_LIB}
+  PUBLIC
+    aliceVision_camera
+    aliceVision_image
+  PRIVATE
+    aliceVision_sfm
+    aliceVision_system
+    ${Boost_FILESYSTEM_LIBRARY}
 )
 
 if(ALICEVISION_HAVE_OPENCV)
