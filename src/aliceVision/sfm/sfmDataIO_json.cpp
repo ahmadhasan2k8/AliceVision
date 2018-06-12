@@ -114,6 +114,8 @@ void saveIntrinsic(const std::string& name, IndexT intrinsicId, const std::share
     intrinsicTree.add_child("distortionParams", distParamsTree);
   }
 
+  intrinsicTree.put("locked", intrinsic->isLocked());
+
   parentTree.push_back(std::make_pair(name, intrinsicTree));
 }
 
@@ -145,6 +147,12 @@ void loadIntrinsic(IndexT& intrinsicId, std::shared_ptr<camera::IntrinsicBase>& 
 
   pinholeIntrinsic->setDistortionParams(distortionParams);
   intrinsic = std::static_pointer_cast<camera::IntrinsicBase>(pinholeIntrinsic);
+
+  // intrinsic lock
+  if(intrinsicTree.get<bool>("locked", false))
+    intrinsic->lock();
+  else
+    intrinsic->unlock();
 }
 
 void saveRig(const std::string& name, IndexT rigId, const Rig& rig, bpt::ptree& parentTree)
