@@ -39,7 +39,7 @@ target_link_libraries(aliceVision_dataio
 )
 
 if(ALICEVISION_HAVE_OPENCV)
-  target_link_libraries(aliceVision_dataio ${OpenCV_LIBS})
+  target_link_libraries(aliceVision_dataio PRIVATE ${OpenCV_LIBS})
 endif()
 
 set_target_properties(aliceVision_dataio

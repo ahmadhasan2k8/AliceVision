@@ -36,7 +36,7 @@ target_link_libraries(aliceVision_lInftyComputerVision
 )
 
 if(MOSEK_FOUND)  
-    target_link_libraries(aliceVision_lInftyComputerVision ${MOSEK_LIB})
+    target_link_libraries(aliceVision_lInftyComputerVision PUBLIC ${MOSEK_LIB})
 endif()
 
 set_target_properties(aliceVision_lInftyComputerVision
